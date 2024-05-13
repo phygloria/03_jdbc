@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+
+<properties>
+
+    <comment />
+    <entry key="phoneViewAll">
+        SELECT
+            A.USER_NO,
+            A.USER_NAME,
+            A.USER_ADDRESS,
+            B.CALL_NAME,
+            B.CALL_NUMBER,
+            B.MAIN_CALL
+        FROM USER_INFO A
+        JOIN CALL_NUMBER B ON A.USER_NO = B.USER_NO
+    </entry>
+
+
+    <entry key="phoneFindByName">
+        SELECT
+            A.USER_NO,
+            A.USER_NAME,
+            A.USER_ADDRESS,
+            B.CALL_NAME,
+            B.CALL_NUMBER,
+            B.MAIN_CALL
+        FROM USER_INFO A
+        JOIN CALL_NUMBER B ON A.USER_NO = B.USER_NO
+        WHERE A.USER_NAME = ?
+    </entry>
+
+    <entry key="phoneModify1">
+        UPDATE USER_INFO A
+            SET A.USER_NAME = ?,
+                A.USER_ADDRESS = ?
+        WHERE A.USER_NO = ?
+    </entry>
+
+    <entry key="phoneModify2">
+        UPDATE CALL_NUMBER B
+            SET B.CALL_NUMBER = ?
+        WHERE B.USER_NO = ?
+    </entry>
+
+
+</properties>
