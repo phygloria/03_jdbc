@@ -28,8 +28,6 @@ public class PhoneService {
 
 
 
-
-
     public static PhoneDTO phoneFindByName(String userName) {
         PhoneDTO findPhone = phoneRepository.phoneFindByName(userName);
         if(findPhone != null){
@@ -39,6 +37,29 @@ public class PhoneService {
             return null;
         }
     }
+
+
+    public String phoneInsert(PhoneDTO phone) throws Exception {
+        // 서비스는 아래와 같이 우리의 비즈니스 로직에 맞는 유효성을 검사한다.
+        // 아래는 사원의 번호가 중복되는 것을 확인하고 만약 중복이라면 등록을 취소해야한다.
+        PhoneDTO findPhone = phoneRepository.phoneFindByName(phone.getUserName());
+
+        if(findPhone != null){
+            throw new Exception("이미 저장된 이름이 있습니다.");
+        }
+
+        int result = phoneRepository.phoneInsert(phone);
+
+        if(result < 0){
+            throw new Exception("등록실패");
+        }
+
+        return (result > 0) ? "등록성공" : "등록실패";
+    }
+
+
+
+
 
 
     public PhoneDTO phoneModify(PhoneDTO phone) throws Exception {

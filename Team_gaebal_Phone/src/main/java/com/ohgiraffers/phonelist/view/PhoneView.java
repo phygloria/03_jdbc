@@ -31,7 +31,7 @@ public class PhoneView {
                     phoneFindByName();
                     break;
                 case 3:
-//                    phoneInsert();
+                    phoneInsert();
                     break;
                 case 4:
                     phoneUpdate();
@@ -88,6 +88,34 @@ public class PhoneView {
 //            throw new RuntimeException(e);
 //        }
 //    }
+
+
+
+
+    public static void phoneInsert(){
+        Scanner sc = new Scanner(System.in);
+        PhoneDTO phone = new PhoneDTO();
+
+        System.out.println("등록할 전화번호의 정보를 입력해주세요 ");
+        System.out.print("전화번호의 이름를 입력해주세요 : ");
+        phone.setUserName(sc.nextLine());
+        System.out.print("전화번호 주인의 주소를 입력해주세요 : ");
+        phone.setUserAddress(sc.nextLine());
+        System.out.print("전화번호의 이름을 입력해주세요 예) (핸드폰, 집, 직장) : ");
+        phone.setCallName(sc.nextLine());
+        System.out.print("전화번호을 입력해주세요 : ");
+        phone.setCallNumber(sc.nextLine());
+        System.out.print("전화번호가 대표번호인지 y 나 n 으로만 입력해주세요 : ");
+        phone.setMainCall(sc.nextLine());
+
+        try {
+            String result = phoneService.phoneInsert(phone);
+            System.out.println(result);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        sc.nextLine();
+    }
 
 
 

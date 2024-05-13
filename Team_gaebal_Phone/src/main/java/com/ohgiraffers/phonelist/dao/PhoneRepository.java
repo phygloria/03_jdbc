@@ -90,6 +90,40 @@ public class PhoneRepository {
     }
 
 
+    public int phoneInsert(PhoneDTO phone) {
+        String query = pros.getProperty("phoneInsert");
+        String query2 = pros.getProperty("numInsert");
+        con = getConnection();
+        int result = 0;
+        int result1 = 0;
+
+        try {
+            pstmt = con.prepareStatement(query);
+            pstmt.setString(1,phone.getUserName());
+            pstmt.setString(2,phone.getUserAddress());
+
+            result = pstmt.executeUpdate();
+
+            pstmt = con.prepareStatement(query2);
+            pstmt.setString(1,phone.getCallName());
+            pstmt.setString(2,phone.getCallNumber());
+            pstmt.setString(3,phone.getMainCall());
+            result1 = pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }finally {
+            close(con);
+            close(pstmt);
+        }
+
+        return result + result1;
+    }
+
+
+
+
+
 
     public int phoneModify(PhoneDTO phone) {
         // 쿼리불러오기
@@ -103,7 +137,6 @@ public class PhoneRepository {
             pstmt.setInt(3, phone.getUserNo());
 
             result1 = pstmt.executeUpdate();
-
 
 
 
@@ -123,7 +156,6 @@ public class PhoneRepository {
             close(con);
             close(pstmt);
         }
-
 
         return 0;
     }

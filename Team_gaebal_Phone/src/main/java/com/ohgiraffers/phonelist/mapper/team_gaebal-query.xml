@@ -30,6 +30,40 @@
         WHERE A.USER_NAME = ?
     </entry>
 
+
+    <entry key="phoneInsert">
+        INSERT user_info
+        (
+        user_name,
+        user_address
+        )VALUES(
+        ?,
+        ?
+        )
+    </entry>
+
+    <entry key="numInsert">
+        INSERT call_number
+        (
+        user_no,
+        call_name,
+        call_number,
+        main_call
+        )VALUES(
+        LAST_INSERT_ID(),
+        ?,
+        ?,
+        ?
+        )
+    </entry>
+
+
+
+
+
+
+
+
     <entry key="phoneModify1">
         UPDATE USER_INFO A
             SET A.USER_NAME = ?,
